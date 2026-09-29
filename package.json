@@ -1,0 +1,45 @@
+{
+  "name": "zippping",
+  "version": "1.0.0",
+  "description": "Batch image and PDF compressor for macOS interview uploads",
+  "main": "main.js",
+  "author": "Zippping",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "check": "node --check main.js && node --check preload.js && node --check src/renderer.js",
+    "build:mac": "electron-builder --mac"
+  },
+  "dependencies": {
+    "bmp-js": "^0.1.0",
+    "heic-convert": "^2.1.0",
+    "pdfjs-dist": "^4.10.38",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.zippping.converter",
+    "productName": "Zippping",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "mac": {
+      "category": "public.app-category.photography",
+      "target": ["dmg", "zip"],
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    }
+  }
+}

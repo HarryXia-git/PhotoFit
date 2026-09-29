@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <title>Zippping · 材料轻量化</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">Z</span><span>Zippping</span></div>
+    <div class="topbar-note"><span class="status-dot"></span>完全在本机处理 · 文件不会上传</div>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">面试材料压缩器</p>
+        <h1>让每份材料，刚好够轻。</h1>
+        <p class="intro-copy">拖入图片或 PDF，自动生成不超过指定大小的清晰 JPG。适合招聘网站、报名表和在线申请。</p>
+      </div>
+      <div class="format-pills"><span>JPG</span><span>PNG</span><span>WEBP</span><span>PDF</span><span>TIFF</span></div>
+    </section>
+
+    <section class="workspace">
+      <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="拖入文件或选择文件">
+        <input id="fileInput" type="file" multiple accept=".jpg,.jpeg,.png,.webp,.gif,.bmp,.tif,.tiff,.heic,.heif,.avif,.pdf,image/*,application/pdf" />
+        <div class="drop-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v3.5A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5V14" /></svg></div>
+        <h2>拖入文件到这里</h2>
+        <p>支持批量图片和 PDF，PDF 会按页导出</p>
+        <button class="primary-button" id="browseButton" type="button"><span>选择文件</span><span class="button-shortcut">⌘ O</span></button>
+      </div>
+
+      <aside class="settings-panel">
+        <div class="panel-heading"><div><p class="section-label">输出设置</p><h2>控制文件大小</h2></div><span class="settings-icon">⌘</span></div>
+        <label class="field-label" for="targetSize">单个文件上限</label>
+        <div class="size-input-wrap"><input id="targetSize" type="number" min="20" max="50000" step="10" value="200" /><span>KB</span></div>
+        <div class="quick-sizes" role="group" aria-label="常用大小"><button type="button" data-size="100">100 KB</button><button class="active" type="button" data-size="200">200 KB</button><button type="button" data-size="500">500 KB</button><button type="button" data-size="1000">1 MB</button></div>
+        <div class="divider"></div>
+        <div class="output-row"><div><span class="field-label">输出格式</span><strong>JPEG · JPG</strong></div><span class="format-lock">固定</span></div>
+        <div class="output-row"><div><span class="field-label">输出位置</span><strong id="outputPathLabel">默认保存到源文件旁</strong></div><button class="text-button" id="chooseOutputButton" type="button">更改</button></div>
+        <p class="hint">会优先保留原始分辨率，只有在最低画质仍超限时才缩小尺寸。</p>
+      </aside>
+    </section>
+
+    <section class="queue-section">
+      <div class="queue-heading"><div><p class="section-label">处理队列 <span id="queueCount">0</span></p><h2 id="queueTitle">还没有添加文件</h2></div><div class="queue-actions"><button class="ghost-button" id="clearButton" type="button" disabled>清空</button><button class="primary-button compact" id="startButton" type="button" disabled><span class="play-icon">▶</span><span>开始处理</span></button></div></div>
+      <div class="file-list" id="fileList"><div class="empty-state"><div class="empty-mark">＋</div><span>添加文件后，它们会出现在这里</span></div></div>
+    </section>
+
+    <section class="result-banner" id="resultBanner" hidden><div class="result-check">✓</div><div><strong id="resultTitle">处理完成</strong><p id="resultDetail"></p></div><button class="text-button" id="openResultButton" type="button">打开文件夹</button></section>
+  </main>
+  <footer><span>Zippping 1.0</span><span>本地处理 · 为求职材料而做</span></footer>
+
+  <script type="module" src="./renderer.js"></script>
+</body>
+</html>
